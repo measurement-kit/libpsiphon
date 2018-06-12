@@ -76,6 +76,7 @@ add_library(
 )
 target_include_directories(
   psiphon PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
+                        ${CMAKE_CURRENT_SOURCE_DIR}/vendor
                         ${CURL_INCLUDE_DIRS}
 )
 install(
@@ -96,6 +97,8 @@ if("${WIN32}" OR "${MINGW}")
     target_link_libraries(psiphon -static-libgcc -static-libstdc++)
   endif()
 endif()
+
+target_link_libraries(psiphon ${CMAKE_CURRENT_SOURCE_DIR}/psi.dylib)
 
 # Testing
 

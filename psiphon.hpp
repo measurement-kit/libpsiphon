@@ -20,7 +20,7 @@ class Client {
 
   virtual ~Client() noexcept;
 
-  bool run() noexcept;
+  bool run(std::string) noexcept;
 
   bool stop() noexcept;
 

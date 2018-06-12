@@ -1,4 +1,5 @@
 #include "psiphon.hpp"
+#include "vendor/psi.h"
 
 #include <iostream>
 
@@ -15,7 +16,22 @@ Client::Client(Settings settings) noexcept : Client::Client() {
 
 Client::~Client() noexcept {}
 
-bool Client::run() noexcept { return true; }
+bool Client::run(std::string config) noexcept {
+  GoString embeddedServerList;
+  embeddedServerList.p = "";
+  embeddedServerList.n = 0;
+
+  std::clog << config << std::endl;
+
+  GoString configJSON;
+  configJSON.p = config.c_str();
+  configJSON.n = config.size();
+
+  auto tmp = Start(configJSON, embeddedServerList);
+  std::string result(tmp);
+  std::clog << result << std::endl;
+  return true;
+}
 
 bool Client::stop() noexcept { return true; }
 
