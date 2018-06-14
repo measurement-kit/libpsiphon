@@ -4,6 +4,9 @@ This repo will implement the Psiphon OONI test.
 
 ## Build instructions
 
+Ensure you have in the root of this directory the a shared library build of
+psiphon called `psi.dylib`.
+
 ### Unix
 
 ```

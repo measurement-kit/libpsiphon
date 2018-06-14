@@ -14,3 +14,9 @@
 /.vs
 /Makefile
 /psiphon-config.json
+
+# Psiphon related
+/psi.dylib
+/psiphon.boltdb
+/server_list_compressed
+/vendor/psi.a
