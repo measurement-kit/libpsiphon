@@ -33,6 +33,8 @@ int main() {
     std::clog << "Socks proxy running on port: " << res.socks_proxy_port << std::endl;
   } else {
     std::clog << "Psiphon failed to connect with error: " << res.error << std::endl;
+    client.stop();
+    return 1;
   }
 
   std::clog << "Stopping Psiphon..." << std::endl;
