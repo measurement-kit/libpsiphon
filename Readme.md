@@ -4,8 +4,11 @@ This repo will implement the Psiphon OONI test.
 
 ## Build instructions
 
-Ensure you have in the root of this directory the a shared library build of
-psiphon called `psi.dylib`.
+Ensure you have in the root of this directory a shared library build of
+psiphon called `libpsiphontunnel.dylib` and under `vendor/` the corresponding
+`libpsiphontunnel.h` file. Official releases can be found at
+https://github.com/Psiphon-Labs/psiphon-tunnel-core/releases in
+`Psiphon-Client-Library.zip`.
 
 ### Unix
 

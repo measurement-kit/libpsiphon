@@ -13,10 +13,10 @@
 /Testing/
 /.vs
 /Makefile
-/psiphon-config.json
 
 # Psiphon related
-/psi.dylib
+/libpsiphontunnel.dylib
+/psiphon-config.json
 /psiphon.boltdb
 /server_list_compressed
 /vendor/psi.a
