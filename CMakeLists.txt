@@ -5,9 +5,9 @@ project(psiphon LANGUAGES CXX)
 
 message(STATUS "Downloading nlohmann/json")
 file(
-  DOWNLOAD https://raw.githubusercontent.com/nlohmann/json/v3.1.2/single_include/nlohmann/json.hpp
+  DOWNLOAD https://raw.githubusercontent.com/nlohmann/json/v3.3.0/single_include/nlohmann/json.hpp
   "${CMAKE_CURRENT_BINARY_DIR}/json.hpp" EXPECTED_HASH
-  SHA256=fbdfec4b4cf63b3b565d09f87e6c3c183bdd45c5be1864d3fcb338f6f02c1733
+  SHA256=f1327bb60c58757a3dd2b0c9c45d49503d571337681d950ec621f8374bcc14d4
   TLS_VERIFY ON SHOW_PROGRESS)
 
 if (${MSVC})
@@ -98,7 +98,7 @@ if("${WIN32}" OR "${MINGW}")
   endif()
 endif()
 
-target_link_libraries(psiphon ${CMAKE_CURRENT_SOURCE_DIR}/psi.dylib)
+target_link_libraries(psiphon ${CMAKE_CURRENT_SOURCE_DIR}/libpsiphontunnel.dylib)
 
 # Testing
 
