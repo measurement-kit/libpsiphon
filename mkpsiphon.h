@@ -278,7 +278,6 @@ mkpsiphon_results_t *mkpsiphon_settings_perform_nonnull(
   // Read configuration file and store it into a string.
   std::string config;
   {
-    // TODO(bassosimone): make sure this actually fails if file is missing.
     MKPSIPHON_TRACE(config_file_path, settings->config_file_path);
     std::ifstream filep;
     filep.exceptions(std::ifstream::failbit | std::ifstream::badbit);
@@ -286,7 +285,10 @@ mkpsiphon_results_t *mkpsiphon_settings_perform_nonnull(
       filep.open(settings->config_file_path);
       config = std::string{std::istreambuf_iterator<char>{filep},
                            std::istreambuf_iterator<char>{}};
+      // Important!!! The following line MUST NOT be uncommented because
+      // we don't want to leak the psiphon config inside travis logs.
       //MKPSIPHON_TRACE(config_string, config);
+      //
     } catch (const std::exception &) {
       res->error_reason = "Cannot read config file";
       return res.release();
@@ -300,7 +302,10 @@ mkpsiphon_results_t *mkpsiphon_settings_perform_nonnull(
   {
     std::string serialised;
     {
-      // TODO(bassosimone): what happens if the timeout is negative?
+      // Implementation note: if the timeout is negative then psiphon will
+      // just fail connecting immediately without misbehaving. In particular
+      // the returned failure is related to Go's context. For this reason
+      // I have decided that it's fine to void checking for negative timeout.
       const char *str = (*start)(config.c_str(), "", settings->platform.c_str(),
                                  settings->network_id.c_str(), settings->timeout);
       MKPSIPHON_TRACE(start_rv, str);
