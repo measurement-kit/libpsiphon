@@ -69,36 +69,25 @@ endif()
 # Library
 
 add_library(
-  psiphon
+  mkpsiphon
   STATIC
-  psiphon.cpp
-  psiphon.hpp
+  mkpsiphon.cpp
+  mkpsiphon.h
 )
 target_include_directories(
-  psiphon PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
+  mkpsiphon PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}
                         ${CMAKE_CURRENT_SOURCE_DIR}/vendor
                         ${CURL_INCLUDE_DIRS}
 )
-install(
-  FILES
-  psiphon.hpp
-  DESTINATION
-  include/measurement_kit/libpsiphon
-)
-install(
-  TARGETS
-  psiphon
-  DESTINATION
-  lib
-)
 if("${WIN32}" OR "${MINGW}")
-  target_link_libraries(psiphon ws2_32 "${_EXTRA_LIBS}")
+  target_link_libraries(mkpsiphon ws2_32 "${_EXTRA_LIBS}")
   if ("${MINGW}")
-    target_link_libraries(psiphon -static-libgcc -static-libstdc++)
+    target_link_libraries(mkpsiphon -static-libgcc -static-libstdc++)
   endif()
 endif()
 
-target_link_libraries(psiphon ${CMAKE_CURRENT_SOURCE_DIR}/libpsiphontunnel.dylib)
+add_executable(mkpsiphon-client mkpsiphon-client.cpp)
+target_link_libraries(mkpsiphon-client mkpsiphon ${CURL_LIBRARIES})
 
 # Testing
 
@@ -107,11 +96,9 @@ enable_testing()
 
 if(${BUILD_TESTING}) # is a standard name in CMake-land
   if(${CURL_FOUND})
-    add_executable(example_psiphon example_psiphon.cpp)
-    target_link_libraries(example_psiphon psiphon ${CURL_LIBRARIES})
     add_test(
-      NAME psiphon_test
-      COMMAND example_psiphon
+      NAME bootstrap_test
+      COMMAND mkpsiphon-client
     )
   else()
     message(WARNING "cURL not found: cannot build example clients")

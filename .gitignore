@@ -3,9 +3,9 @@
 /CMakeFiles/
 /cmake_install.cmake
 /CTestTestfile.cmake
-/example_psiphon
+/mkpsiphon-client
 /json.hpp
-/libpsiphon.a
+/libmkpsiphon.a
 /.ninja_deps
 /.ninja_log
 /rules.ninja
@@ -19,4 +19,3 @@
 /psiphon-config.json
 /psiphon.boltdb
 /server_list_compressed
-/vendor/psi.a
