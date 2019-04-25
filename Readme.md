@@ -2,6 +2,9 @@
 
 This repo will implement the Psiphon OONI test.
 
+⚠⚠⚠⚠⚠⚠⚠: This repository is now historical. We are implementing a Psiphon
+test as part of [MKEngine](https://github.com/measurement-kit/engine).
+
 ## Build instructions
 
 Ensure you have in the root of this directory a shared library build of
